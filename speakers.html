@@ -1,0 +1,90 @@
+<script>
+
+const API_URL = "https://gdcc-expo.com/wp-json/wp/v2/speaker2026?_embed";
+
+let SPEAKERS = [];
+
+let activeFilter = "All";
+let searchQ = "";
+
+async function fetchSpeakers() {
+
+  try {
+
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    SPEAKERS = data.map(function(item) {
+
+      let photo = "";
+
+      if (
+        item._embedded &&
+        item._embedded["wp:featuredmedia"]
+      ) {
+        photo = item._embedded["wp:featuredmedia"][0].source_url;
+      }
+
+      return {
+        name: item.title.rendered || "Speaker",
+        des: "Speaker",
+        company: "GDCC Canada",
+        photo: photo
+      };
+
+    });
+
+    renderGrid();
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+}
+
+function renderGrid() {
+
+  const grid = document.getElementById("speakersGrid");
+
+  let html = "";
+
+  SPEAKERS.forEach(function(spk) {
+
+    let photoHTML = "";
+
+    if (spk.photo) {
+
+      photoHTML =
+        '<img class="spk-photo" src="' +
+        spk.photo +
+        '" alt="' +
+        spk.name +
+        '">';
+
+    }
+
+    html +=
+      '<div class="spk-card">' +
+
+        photoHTML +
+
+        '<div class="spk-info">' +
+          '<div class="spk-name">' + spk.name + '</div>' +
+          '<div class="spk-des">' + spk.des + '</div>' +
+        '</div>' +
+
+        '<div class="spk-company">' + spk.company + '</div>' +
+
+      '</div>';
+
+  });
+
+  grid.innerHTML = html;
+
+}
+
+fetchSpeakers();
+
+</script>

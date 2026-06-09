@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDCC Canada 2026 — Speakers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-hdr {
+      background: #ff0000;
+      border-bottom: 2px solid #eee;
+      box-shadow: 0 2px 18px rgba(0, 0, 0, 0.06);
+      padding: 20px 36px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .page-hdr-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .brand p {
+      font-size: 10px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .brand h1 {
+      font-size: clamp(14px, 1.8vw, 20px);
+      font-weight: 400;
+      color: #ffffff;
+      font-family: 'Abel', sans-serif;
+      letter-spacing: 0.3px;
+    }
+
+    .speaker-count {
+      font-size: 12px;
+      color: #999;
+      font-weight: 400;
+      padding: 6px 16px;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .speaker-count span {
+      font-weight: 700;
+      color: #c0182e;
+    }
+
+    /* ── FILTERS ── */
+    .filters-wrap {
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      padding: 14px 36px;
+      position: sticky;
+      top: 73px;
+      z-index: 99;
+    }
+
+    .filters-inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      max-width: 1400px;
+      gap: 10px;
+      margin: 0 auto;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+
+    .filters-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ftab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      color: #555;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .ftab:hover {
+      border-color: #c0182e;
+      color: #c0182e;
+      background: #fff5f5;
+    }
+
+    .ftab.active {
+      background: #c0182e;
+      border-color: #c0182e;
+      color: #fff;
+    }
+
+    .ftab .count {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .ftab.active .count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      /* margin-bottom: 12px; */
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f7f7f7;
+      border: 1.5px solid #e4e4e4;
+      border-radius: 10px;
+      padding: 8px 5px;
+      max-width: 440px;
+      transition: all 0.2s;
+    }
+
+    .search-box:focus-within {
+      border-color: #c0182e;
+      background: #fff8f8;
+    }
+
+    .search-box svg {
+      width: 16px;
+      height: 16px;
+      stroke: #bbb;
+      flex-shrink: 0;
+    }
+
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      color: #1a1a2e;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      flex: 1;
+    }
+
+    .search-box input::placeholder {
+      color: #bbb;
+    }
+
+    /* ── GRID ── */
+    .grid-wrap {
+      padding: 28px 5px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #d0d0d0;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    /* ── SPEAKER CARD ── */
+    .spk-card {
+      position: relative;
+      aspect-ratio: 6/3;
+      overflow: hidden;
+      cursor: pointer;
+      background: #e8e8e8;
+      border-right: 1px solid #d0d0d0;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    /* Color-tinted backgrounds — one per designation */
+    .spk-card[data-des="Founder & CEO"] {
+      background: #c0182e;
+    }
+
+    .spk-card[data-des="CEO"] {
+      background: #c0182e;
+    }
+
+    .spk-card[data-des="Co-Founder & CEO"] {
+      background: #a01028;
+    }
+
+    .spk-card[data-des="President"] {
+      background: #1a5276;
+    }
+
+    .spk-card[data-des="CTO"] {
+      background: #1a5276;
+    }
+
+    .spk-card[data-des="CIO"] {
+      background: #1a5276;
+    }
+
+    .spk-card[data-des="CDO"] {
+      background: #117a65;
+    }
+
+    .spk-card[data-des="VP"] {
+      background: #6d4c8a;
+    }
+
+    .spk-card[data-des="SVP"] {
+      background: #6d4c8a;
+    }
+
+    .spk-card[data-des="Director"] {
+      background: #b7770d;
+    }
+
+    .spk-card[data-des="MD"] {
+      background: #b7770d;
+    }
+
+    .spk-card[data-des="Partner"] {
+      background: #2e4057;
+    }
+
+    .spk-card[data-des="Minister"] {
+      background: #145a32;
+    }
+
+    .spk-card[data-des="Commissioner"] {
+      background: #145a32;
+    }
+
+    .spk-card[data-des="Head"] {
+      background: #784212;
+    }
+
+    .spk-card[data-des="empty"] {
+      background: #d8d8d8;
+    }
+
+    /* Photo */
+    /* .spk-photo{
+  position:absolute;
+  bottom:0;right:0;
+  width:65%;height:95%;
+  object-fit:cover;object-position:top center;
+  display:block;
+} */
+    .spk-photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100% !important;
+      object-fit:cover;
+      object-position: top center;
+      display: block;
+    }
+
+    /* Dummy photo placeholder */
+    .spk-photo-dummy {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 65%;
+      height: 95%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 8px;
+      opacity: 0.25;
+    }
+
+    .spk-photo-dummy svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    /* Text overlay */
+    .spk-info {
+      line-height: 14px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 14px 14px 10px;
+      z-index: 2;
+      max-width: 52%;
+    }
+
+    .spk-name {
+      font-family: 'Abel', sans-serif;
+      font-size: clamp(14px, 1.4vw, 20px);
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: 0.2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+      margin-bottom: 3px;
+    }
+
+    .spk-des {
+      font-size: clamp(9px, 0.85vw, 12px);
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .spk-company {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-size: clamp(9px, 0.8vw, 11px);
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Abel', sans-serif;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    /* Subtle dark gradient so text always readable */
+    .spk-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.28) 0%, transparent 60%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Hover overlay */
+    .spk-hover {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: rgba(192, 24, 46, 0.92);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+      pointer-events: none;
+    }
+
+    .spk-card:hover .spk-hover {
+      opacity: 1;
+    }
+
+    .spk-hover-name {
+      font-family: 'Abel', sans-serif;
+      font-size: clamp(16px, 1.5vw, 22px);
+      color: #fff;
+      font-weight: 400;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .spk-hover-des {
+      font-size: clamp(10px, 0.85vw, 12px);
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .spk-hover-co {
+      font-size: clamp(10px, 0.85vw, 12px);
+      color: rgba(255, 255, 255, 0.65);
+      font-family: 'Inter', sans-serif;
+      padding: 3px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 4px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .spk-hover-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 4px;
+    }
+
+    .spk-hover-tag {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .spk-hover-day {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: auto;
+      padding-top: 10px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Empty card */
+    .spk-card.empty {
+      cursor: default;
+      background: #e8e8e8 !important;
+    }
+
+    .spk-card.empty::before {
+      display: none;
+    }
+
+    .spk-card.empty:hover .spk-hover {
+      opacity: 0;
+    }
+
+    /* Hidden */
+    .spk-card.hidden {
+      display: none;
+    }
+
+    /* No results */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+      color: #bbb;
+      font-size: 16px;
+      font-family: 'Abel', sans-serif;
+      grid-column: 1/-1;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1100px) {
+      .speakers-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(max-width:800px) {
+
+      .page-hdr,
+      .filters-wrap,
+      .grid-wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:520px) {
+      .speakers-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .spk-name {
+        font-size: 13px;
+      }
+
+      .filters-wrap {
+        top: 62px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-hdr">
+    <div class="page-hdr-inner">
+      <div class="brand">
+        <p>GDCC Canada 2026 · Speaker Faculty</p>
+        <h1>Global Data Centre & Cloud Expo — Confirmed Speakers</h1>
+      </div>
+      <div class="speaker-count" id="speakerCount"><span id="visCount">16</span> Speakers</div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters-wrap">
+    <div class="filters-inner">
+      <div class="search-wrap">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input  type="text" id="searchInput" placeholder="speaker name or company...">
+        </div>
+      </div>
+      <div class="filters-row" id="filterRow"></div>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="grid-wrap">
+    <div class="speakers-grid" id="speakersGrid"></div>
+    <div class="no-results" id="noResults">No speakers match your filter.</div>
+  </div>
+
+  <script>
+    const SPEAKERS = [
+      { name: "Jhon Devide", des: "Founder & CEO", company: "Microsoft", day: "Day 1", topic: "AI Infrastructure", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Sarah Mitchell", des: "CTO", company: "AWS", day: "Day 1", topic: "Cloud Architecture", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Raj Patel", des: "President", company: "Google Cloud", day: "Day 1", topic: "Hyperscale", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Emma Laurent", des: "CDO", company: "IBM", day: "Day 2", topic: "Digital Twins", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Marcus Chen", des: "VP", company: "Dell EMC", day: "Day 1", topic: "Edge Computing", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Priya Sharma", des: "Director", company: "Cisco", day: "Day 2", topic: "Zero Trust Security", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "David Okafor", des: "MD", company: "Schneider", day: "Day 1", topic: "Power & Energy", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Anna Kowalski", des: "SVP", company: "Equinix", day: "Day 2", topic: "Colocation", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Tom Brennan", des: "CIO", company: "TD Bank", day: "Day 1", topic: "FinOps", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Leila Hassan", des: "Minister", company: "Govt. Canada", day: "Day 2", topic: "Digital Policy", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Kevin Park", des: "Partner", company: "Deloitte", day: "Day 2", topic: "Investment", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Nadia Tremblay", des: "Co-Founder & CEO", company: "Noviant AI", day: "Day 1", topic: "AI & ML", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "James Osei", des: "Head", company: "MTN Group", day: "Day 2", topic: "Telecom & 5G", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Sofia Rivera", des: "VP", company: "Nutanix", day: "Day 1", topic: "Multi-Cloud", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Li Wei", des: "Director", company: "Huawei", day: "Day 2", topic: "Data Centres", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Chris Wallace", des: "Commissioner", company: "CRTC", day: "Day 2", topic: "Regulation", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+      { name: "Chris Wallace", des: "Commissioner", company: "CRTC", day: "Day 2", topic: "Regulation", photo: "https://gdcc-expo.com/wp-content/uploads/2026/05/01.webp" },
+    ];
+
+    /* ── Designation groups for filter tabs ── */
+    const DES_GROUPS = {
+      "All": null,
+      "C-Suite": ["CEO", "Founder & CEO", "Co-Founder & CEO", "CTO", "CIO", "CDO", "President"],
+      "VP / SVP": ["VP", "SVP"],
+      "Director / MD": ["Director", "MD"],
+      "Government": ["Minister", "Commissioner"],
+      "Partner / Head": ["Partner", "Head"],
+      "Day 1": "_day1",
+      "Day 2": "_day2",
+    };
+
+    let activeFilter = "All";
+    let searchQ = "";
+
+    function desGroup(des) {
+      for (const [k, v] of Object.entries(DES_GROUPS)) {
+        if (Array.isArray(v) && v.includes(des)) return k;
+      }
+      return null;
+    }
+
+    function isVisible(spk) {
+      const q = searchQ.toLowerCase();
+      const matchSearch = !q || spk.name.toLowerCase().includes(q) || spk.company.toLowerCase().includes(q) || spk.topic.toLowerCase().includes(q);
+      if (!matchSearch) return false;
+      if (activeFilter === "All") return true;
+      if (activeFilter === "Day 1") return spk.day === "Day 1";
+      if (activeFilter === "Day 2") return spk.day === "Day 2";
+      const grp = desGroup(spk.des);
+      return grp === activeFilter;
+    }
+
+    function buildFilters() {
+      const row = document.getElementById('filterRow');
+      const counts = {};
+      for (const k of Object.keys(DES_GROUPS)) {
+        if (k === "All") { counts[k] = SPEAKERS.length; continue; }
+        if (k === "Day 1") { counts[k] = SPEAKERS.filter(s => s.day === "Day 1").length; continue; }
+        if (k === "Day 2") { counts[k] = SPEAKERS.filter(s => s.day === "Day 2").length; continue; }
+        counts[k] = SPEAKERS.filter(s => desGroup(s.des) === k).length;
+      }
+      row.innerHTML = Object.keys(DES_GROUPS).map(k => `
+    <div class="ftab${k === activeFilter ? ' active' : ''}" onclick="setFilter('${k}')">
+      ${k}<span class="count">${counts[k]}</span>
+    </div>`).join('');
+    }
+
+    function setFilter(f) {
+      activeFilter = f;
+      buildFilters();
+      renderGrid();
+    }
+
+    /* Dummy SVG person silhouette */
+    const silhouetteSVG = `<svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="40" cy="28" rx="18" ry="20" fill="white"/>
+  <ellipse cx="40" cy="90" rx="34" ry="28" fill="white"/>
+</svg>`;
+
+    /* Color accent per designation group */
+    const DES_COLORS = {
+      "Founder & CEO": "#c0182e", "CEO": "#c0182e", "Co-Founder & CEO": "#a01028",
+      "President": "#1a5276", "CTO": "#1a5276", "CIO": "#1a5276",
+      "CDO": "#117a65", "VP": "#6d4c8a", "SVP": "#6d4c8a",
+      "Director": "#b7770d", "MD": "#b7770d", "Partner": "#2e4057",
+      "Minister": "#145a32", "Commissioner": "#145a32", "Head": "#784212",
+    };
+
+    function cardColor(des) { return DES_COLORS[des] || "#888"; }
+
+    function renderGrid() {
+      const grid = document.getElementById('speakersGrid');
+      const noRes = document.getElementById('noResults');
+      const visible = SPEAKERS.filter(isVisible);
+
+      document.getElementById('visCount').textContent = visible.length;
+
+      if (visible.length === 0) {
+        grid.innerHTML = ''; noRes.classList.add('show'); return;
+      }
+      noRes.classList.remove('show');
+
+      /* Pad to multiple of 4 */
+      const padded = [...visible];
+      while (padded.length % 4 !== 0) padded.push(null);
+
+      grid.innerHTML = padded.map((spk, i) => {
+        if (!spk) return `<div class="spk-card empty" data-des="empty"></div>`;
+        const bg = cardColor(spk.des);
+        return `
+<div class="spk-card" data-des="${spk.des}" style="background:${bg};">
+  ${spk.photo
+            ? `<img class="spk-photo" src="${spk.photo}" alt="${spk.name}" loading="lazy">`
+            : `<div class="spk-photo-dummy">${silhouetteSVG}</div>`
+          }
+    
+
+      <div class="spk-info">
+        
+        <div class="spk-name">${spk.name}</div>
+        <div class="spk-des">${spk.des}</div>
+      </div>
+      <div class="spk-company">${spk.company}</div>
+
+      <!-- Hover card -->
+      <div class="spk-hover">
+        <div class="spk-hover-name">${spk.name}</div>
+        <div class="spk-hover-des">${spk.des}</div>
+        <div class="spk-hover-co">${spk.company}</div>
+        <div class="spk-hover-tags">
+         <!-- <span class="spk-hover-tag">${spk.topic}</span> -->
+        </div>
+       <!-- <div class="spk-hover-day">${spk.day} · GDCC Canada 2026</div> -->
+      </div>
+    </div>`;
+      }).join('');
+    }
+
+    /* Search */
+    document.getElementById('searchInput').addEventListener('input', function () {
+      searchQ = this.value;
+      renderGrid();
+      document.getElementById('visCount').textContent = SPEAKERS.filter(isVisible).length;
+    });
+
+    buildFilters();
+    renderGrid();
+  </script>
+</body>
+
+</html>

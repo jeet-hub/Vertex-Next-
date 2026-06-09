@@ -191,9 +191,9 @@
                     <div class="col-12">
                         <div class="heading-section">
                             <div class="heading-sub fw-semibold effectFade fadeUp">Who We Are</div>
-                            <div class="heading-title text-gradient-2 effectFade fadeRotateX">The Business of Bringing
+                            <div class="heading-title ">The Business of Bringing
                                 the Right <br>Rooms Together</div>
-                        </div>
+                        </div><br><br>
                     </div>
                     <div class="col-xxl-7 col-lg-6 lg-mb-24">
                         <div class="col-left">
@@ -663,10 +663,11 @@
                 /* SECTION */
                 .impact-section {
                     position: relative;
-                    background: #1e3a52;
+                    background: #042961;
                     width: 100%;
                     padding: 80px 0;
                     overflow: hidden;
+                    border-radius: 15px;
                 }
 
                 /* STAR CANVAS */
@@ -727,6 +728,7 @@
                     border: 1px solid rgba(255, 255, 255, 0.12);
                     display: grid;
                     grid-template-columns: repeat(6, 1fr);
+                    border-radius: 12px;
                 }
 
                 /* CELL */
@@ -782,10 +784,11 @@
                     line-height: 1;
                     margin-bottom: 16px;
                     position: relative;
+
                 }
 
                 .impact-num-main {
-                    font-family: 'Cormorant Garamond', Georgia, serif;
+                    /* font-family: 'Cormorant Garamond', Georgia, serif; */
                     font-size: clamp(40px, 5.5vw, 68px);
                     font-weight: 300;
                     color: rgba(255, 255, 255, 0.90);
@@ -798,7 +801,7 @@
                 }
 
                 .impact-num-suffix {
-                    font-family: 'Cormorant Garamond', Georgia, serif;
+                    /* font-family: 'Cormorant Garamond', Georgia, serif; */
                     font-size: clamp(36px, 5vw, 62px);
                     font-weight: 300;
                     color: #c9a84c;
@@ -807,12 +810,12 @@
 
                 /* LABEL */
                 .impact-label {
-                    font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+                    /* font-family: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif; */
                     font-size: clamp(9px, 0.9vw, 11px);
                     font-weight: 600;
                     letter-spacing: 2.5px;
                     text-transform: uppercase;
-                    color: rgba(255, 255, 255, 0.38);
+                    color: white;
                     line-height: 1.6;
                     transition: color 0.3s;
                     white-space: pre-line;
@@ -2195,39 +2198,188 @@
         <!-- /section-pricing -->
         
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.vn-wrap { font-family: var(--font-sans); padding: 1.25rem 1rem; }
-.vn-hero { text-align: center; margin-bottom: 1rem; }
-.vn-sub { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #378ADD; margin-bottom: 4px; }
-.vn-title { font-size: 22px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; }
-.vn-title span { color: #185FA5; }
-.vn-tabs { display: flex; gap: 6px; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
-.vn-tab { padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; border: 1.5px solid #378ADD; background: transparent; color: #378ADD; transition: all 0.2s; }
-.vn-tab.active { background: #185FA5; color: #fff; border-color: #185FA5; }
-.vn-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.vn-panel { border-radius: 10px; overflow: hidden; border: 1.5px solid #185FA5; }
-.vn-panel-head { padding: 10px 14px; display: flex; align-items: center; gap: 8px; }
-.vn-panel-head.demand { background: #042C53; }
-.vn-panel-head.supply { background: #0C447C; }
-.vn-panel-head i { font-size: 15px; color: #85B7EB; }
-.vn-panel-head .hlabel { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #B5D4F4; }
-.vn-cards { padding: 8px; display: flex; flex-direction: column; gap: 6px; background: var(--color-background-secondary); }
-.vn-card { background: var(--color-background-primary); border-radius: 7px; border: 1px solid #B5D4F4; padding: 10px 12px; }
-.vn-card-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #378ADD; margin-bottom: 3px; }
-.vn-card-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 4px; line-height: 1.25; }
-.vn-divider { width: 30px; height: 2px; background: #378ADD; border-radius: 2px; margin-bottom: 5px; }
-.vn-card-desc { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 5px; }
-.vn-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 2px 7px; border-radius: 20px; background: #E6F1FB; color: #185FA5; border: 1px solid #B5D4F4; }
-@media (max-width: 620px) {
-  .vn-panels { grid-template-columns: 1fr; }
-  .vn-title { font-size: 18px; }
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .vn-wrap {
+        font-family: var(--font-sans);
+        padding: 1.25rem 1rem;
+    }
+
+    .vn-hero {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .vn-sub {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #293F6D;
+        margin-bottom: 4px;
+    }
+
+    .vn-title {
+        font-size: 22px;
+        font-weight: 500;
+        color: var(--color-text-primary);
+        line-height: 1.3;
+    }
+
+    .vn-title span {
+        color: #293F6D;
+    }
+
+    .vn-tabs {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .vn-tab {
+        padding: 10px 30px;
+        border-radius: 10px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        border: 1.5px solid #293F6D;
+        background: transparent;
+        color: #293F6D;
+        transition: all 0.2s;
+    }
+
+    .vn-tab.active {
+        background: #185FA5;
+        color: #fff;
+        border-color: #185FA5;
+    }
+
+    .vn-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .vn-panel {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1.5px solid #185FA5;
+    }
+
+    .vn-panel-head {
+        padding: 10px 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .vn-panel-head.demand {
+        background: #042C53;
+    }
+
+    .vn-panel-head.supply {
+        background: #0C447C;
+    }
+
+    .vn-panel-head i {
+        font-size: 15px;
+        color: #85B7EB;
+    }
+
+    .vn-panel-head .hlabel {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: #B5D4F4;
+    }
+
+    .vn-cards {
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: var(--color-background-secondary);
+    }
+
+    .vn-card {
+        background: var(--color-background-primary);
+        border-radius: 7px;
+        border: 1px solid #B5D4F4;
+        padding: 10px 12px;
+    }
+
+    .vn-card-tag {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #378ADD;
+        margin-bottom: 3px;
+    }
+
+    .vn-card-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        margin-bottom: 4px;
+        line-height: 1.25;
+    }
+
+    .vn-divider {
+        width: 30px;
+        height: 2px;
+        background: #378ADD;
+        border-radius: 2px;
+        margin-bottom: 5px;
+    }
+
+    .vn-card-desc {
+        font-size: 11px;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+        margin-bottom: 5px;
+    }
+
+    .vn-badge {
+        display: inline-block;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        padding: 2px 7px;
+        border-radius: 20px;
+        background: #E6F1FB;
+        color: #185FA5;
+        border: 1px solid #B5D4F4;
+    }
+
+    @media (max-width: 620px) {
+        .vn-panels {
+            grid-template-columns: 1fr;
+        }
+
+        .vn-title {
+            font-size: 18px;
+        }
+    }
 </style>
 
 <div class="vn-wrap">
-  <div class="vn-hero">
-    <div class="vn-sub">Vertex Next Platform</div>
-    <div class="vn-title">Who attends <span>Vertex Next</span>?</div>
+<div class="vn-hero">
+    <div class="heading-section center mb-48">
+        <div class="heading-sub fw-semibold effectFade fadeUp">Vertex Next Platform</div>
+        <div class="heading-title text-gradient-3 effectFade fadeRotateX">Who attends <span>Vertex Next</span>?</div>
+    </div>
+    <!-- <div class="vn-sub">Vertex Next Platform</div>
+    <div class="vn-title">Who attends <span>Vertex Next</span>?</div> -->
   </div>
 
   <div class="vn-tabs">
