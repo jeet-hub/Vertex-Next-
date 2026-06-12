@@ -1,0 +1,450 @@
+<style>
+/* ── GDCC SPEAKERS WIDGET ── */
+#gdcc-spk-wrap *, #gdcc-spk-wrap *::before, #gdcc-spk-wrap *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+#gdcc-spk-wrap {
+  font-family: 'abel', sans-serif;
+  color: #fff;
+  width: 100%;
+}
+
+/* ── HERO ── */
+#gdcc-spk-wrap .spk-hero {
+  text-align: center;
+  padding: 52px 24px 36px;
+  position: relative;
+}
+
+#gdcc-spk-wrap .spk-hero-meet {
+  font-size: clamp(30px, 5vw, 68px);
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  font-family: 'abel', sans-serif;
+}
+
+#gdcc-spk-wrap .spk-hero-dis {
+  font-size: clamp(30px, 5vw, 68px);
+  font-weight: 900;
+  color: #d0152b;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  font-family: 'abel', sans-serif;
+}
+
+#gdcc-spk-wrap .spk-hero-sub {
+  font-size: clamp(12px, 1vw, 15px);
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  margin: 0 auto 18px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+#gdcc-spk-wrap .spk-hero-badges {
+  display: flex; justify-content: center;
+  gap: 8px; flex-wrap: wrap;
+}
+
+#gdcc-spk-wrap .spk-hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  padding: 7px 15px;
+  font-size: 12px; color: #ddd; font-weight: 500;
+  font-family: 'abel', sans-serif;
+}
+
+#gdcc-spk-wrap .spk-hero-badge svg { width: 13px; height: 13px; stroke: #d0152b; fill: none; flex-shrink: 0; }
+
+/* ── FILTERS ── */
+#gdcc-spk-wrap .spk-filters {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  padding: 12px 20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  background: rgba(6,6,6,0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+#gdcc-spk-wrap .spk-search {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px;
+  padding: 0px 12px;
+  flex: 0 0 220px;
+  transition: border-color 0.2s;
+}
+
+#gdcc-spk-wrap .spk-search:focus-within { border-color: #d0152b; }
+
+#gdcc-spk-wrap .spk-search svg { width: 13px; height: 13px; stroke: #666; fill: none; flex-shrink: 0; }
+
+#gdcc-spk-wrap .spk-search input {
+  background: none; border: none; outline: none;
+  color: #fff; font-family: 'abel', sans-serif;
+  font-size: 12px; width: 100%;
+}
+
+#gdcc-spk-wrap .spk-search input::placeholder { color: #555; }
+
+#gdcc-spk-wrap .spk-ftabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+#gdcc-spk-wrap .spk-ftabs::-webkit-scrollbar { display: none; }
+
+#gdcc-spk-wrap .spk-ftab {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 13px;
+  border-radius: 6px; cursor: pointer; white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #888;
+  font-size: 11px; font-family: 'abel', sans-serif; font-weight: 500;
+  transition: all 0.18s;
+  flex-shrink: 0; user-select: none;
+}
+
+#gdcc-spk-wrap .spk-ftab:hover { border-color: #d0152b; color: #d0152b; }
+#gdcc-spk-wrap .spk-ftab.active { background: #d0152b; border-color: #d0152b; color: #fff; }
+#gdcc-spk-wrap .spk-ftab .cnt { font-size: 9px; padding: 1px 5px; border-radius: 8px; background: rgba(255,255,255,0.18); }
+
+/* ── GRID ── */
+#gdcc-spk-wrap .spk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ── CARD ── */
+#gdcc-spk-wrap .spk-card {
+  background: #111;
+  border: 1.5px solid #d0152b;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s, box-shadow 0.22s;
+  cursor: pointer;
+}
+
+#gdcc-spk-wrap .spk-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 36px rgba(208,21,43,0.38);
+}
+
+/* Card top: photo + text */
+#gdcc-spk-wrap .spk-card-top {
+  display: flex;
+  align-items: flex-start;
+  padding: 14px 14px 0 14px;
+  gap: 0;
+  flex: 1;
+}
+
+/* Photo */
+#gdcc-spk-wrap .spk-photo-box {
+  width: 88px; min-width: 88px; height: 108px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1e1e1e;
+  flex-shrink: 0;
+}
+
+#gdcc-spk-wrap .spk-photo-box img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+#gdcc-spk-wrap .spk-dummy {
+  width: 100%; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+#gdcc-spk-wrap .spk-dummy svg { width: 65%; height: 80%; opacity: 0.12; }
+
+/* Text */
+#gdcc-spk-wrap .spk-card-text {
+  padding: 2px 0 4px 12px;
+  display: flex; flex-direction: column;
+  justify-content: flex-start;
+  flex: 1; min-width: 0;
+}
+
+#gdcc-spk-wrap .spk-name {
+  font-size: clamp(13px, 1.2vw, 17px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  word-break: break-word;
+  font-family: 'abel', sans-serif;
+}
+
+#gdcc-spk-wrap .spk-divider {
+  width: 30px; height: 2.5px;
+  background: #d0152b;
+  border-radius: 2px;
+  margin-bottom: 7px;
+  flex-shrink: 0;
+}
+
+#gdcc-spk-wrap .spk-des {
+  font-size: clamp(9px, 0.7vw, 11px);
+  color: #bbb;
+  line-height: 1.45;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Footer: white company bar */
+#gdcc-spk-wrap .spk-footer {
+  margin: 12px 14px 14px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+#gdcc-spk-wrap .spk-logo-box {
+  width: 32px; height: 32px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 2px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+#gdcc-spk-wrap .spk-logo-box img { width: 100%; height: 100%; object-fit: contain; }
+#gdcc-spk-wrap .spk-logo-box svg { width: 17px; height: 17px; stroke: #ccc; fill: none; }
+
+#gdcc-spk-wrap .spk-company {
+  font-size: clamp(10px, 0.75vw, 12px);
+  color: #1a1a1a;
+  font-weight: 700;
+  line-height: 1.3;
+  font-family: 'abel', sans-serif;
+}
+
+/* Empty */
+#gdcc-spk-wrap .spk-card.empty {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  cursor: default; pointer-events: none;
+}
+
+/* No results */
+#gdcc-spk-wrap .spk-no-results {
+  display: none; text-align: center;
+  padding: 60px 20px; color: #555;
+  font-size: 15px;
+  grid-column: 1 / -1;
+  font-family: 'abel', sans-serif;
+}
+#gdcc-spk-wrap .spk-no-results.show { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) { #gdcc-spk-wrap .spk-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 768px)  { #gdcc-spk-wrap .spk-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  #gdcc-spk-wrap .spk-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  #gdcc-spk-wrap .spk-photo-box { width: 66px; min-width: 66px; height: 80px; }
+  #gdcc-spk-wrap .spk-name { font-size: 12px; }
+  #gdcc-spk-wrap .spk-des { font-size: 9px; }
+  #gdcc-spk-wrap .spk-card-top { padding: 10px 10px 0; }
+  #gdcc-spk-wrap .spk-footer { margin: 8px 10px 10px; padding: 6px 8px; }
+  #gdcc-spk-wrap .spk-search { flex: 0 0 100%; }
+  #gdcc-spk-wrap .spk-hero { padding: 32px 14px 24px; }
+}
+@media (max-width: 420px) {
+  #gdcc-spk-wrap .spk-photo-box { width: 56px; min-width: 56px; height: 68px; }
+}
+</style>
+
+<!-- GDCC SPEAKERS WIDGET -->
+<div id="gdcc-spk-wrap">
+
+  <!-- HERO -->
+  <div class="spk-hero">
+    <div class="spk-hero-meet">MEET OUR</div>
+    <div class="spk-hero-dis">DISTINGUISHED SPEAKERS</div>
+    <div class="spk-hero-sub">Industry leaders. Visionaries. Innovators. Join the brightest minds shaping the future.</div>
+    <div class="spk-hero-badges">
+      <div class="spk-hero-badge">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        October 20–21, 2026
+      </div>
+      <div class="spk-hero-badge">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        The International Centre, Mississauga
+      </div>
+      <div class="spk-hero-badge">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Ontario, Canada
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="spk-filters">
+    <div class="spk-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="gdccSearchInput" placeholder="Search name or company…">
+    </div>
+    <div class="spk-ftabs" id="gdccFilterRow"></div>
+  </div>
+
+  <!-- GRID -->
+  <div class="spk-grid" id="gdccSpeakersGrid"></div>
+  <div class="spk-no-results" id="gdccNoResults">No speakers match your search.</div>
+
+</div>
+
+<script>
+    (function(){
+    let SPEAKERS = [];
+
+fetch('https://gdcc-expo.com/gdcc-admin/api.php?type=speakers')
+  .then(res => res.json())
+  .then(data => {
+
+    SPEAKERS = data.map(item => ({
+      name: item.name,
+      des: item.designation,
+      company: item.company,
+      day: item.day,
+      photo: item.photo.startsWith('http')
+        ? item.photo
+        : 'https://gdcc-expo.com' + item.photo,
+
+      logo: item.logo
+        ? (item.logo.startsWith('http')
+            ? item.logo
+            : 'https://gdcc-expo.com' + item.logo)
+        : ''
+    }));
+
+    buildFilters();
+    renderGrid();
+
+  })
+  .catch(err => {
+    console.error('Speaker API Error:', err);
+  });
+
+
+//    const SPEAKERS = [
+//     { name: "Fartash Haghani",   des: "Director of Enterprise Data & AI",                                        company: "City of Toronto",                    day: "Day 2", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/1.png",   logo: "" },
+//     { name: "Craig Tavares",     des: "President and COO",                                                              company: "BUZZ HPC",                           day: "Day 2", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/2.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/buzz-hpc.png" },
+//     { name: "Sean Maskell",      des: "President & General Manager",                                              company: "Cologix Canada",                     day: "Day 2", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/3.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/COGIX.png" },
+//     { name: "Mehdi Paryavi",     des: "Chairman and Founder",                                 company: "International Data Centre Authority",day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/4.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/IDCA.png" },
+//     { name: "David Shim",        des: "Co-Founder & CEO",                                                                company: "Read AI",                            day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/5.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/read-ai.png" },
+//     { name: "Stephen Crawford",  des: "Minister of Public and Business Service Delivery and Procurement",       company: "Govt. of Ontario",                   day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/6.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/gove-of-onartio.png" },
+//     { name: "Philippe Dufresne", des: "Privacy Commissioner of Canada",                                     company: "Government of Canada",               day: "Day 2", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/7.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/governent-of-canada.png" },
+//     { name: "Andrej Zdravkovic", des: "Chief Software Officer",                                                              company: "AMD",                                day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/8.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/amd.png" },
+//     { name: "Cliff Grossner",    des: "Chief Innovation Officer",                                 company: "Open Compute Project Foundation",    day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/12.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/Open-Compute-Project-Foundation.png" },
+//     { name: "Wylie Nelson",      des: "VP",                                                                      company: "H5 Data Centers",                    day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/10.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/H5-Data-Centres.png" },
+//     { name: "Kathleen Kauth",    des: "Founding Member, iMasons Canada",                                                          company: "iMasons Canada",                     day: "Day 2", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/9.png",   logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/iMasons-Canada.png" },
+//     { name: "Michel Chartier",   des: "Director",                              company: "WSP Canada",                         day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/11.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/WSP-Canada.png" },
+//     { name: "Jonathan Tailly",   des: "Director,Technology Architecture",                              company: "Air Canada ",                         day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/13.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/air-canada.png" },
+//     { name: "Kim Lauritsen",   des: "Senior Vice President",                              company: "Ontario Power Generation",                         day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/14.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/Ontario-Power-Generation.png" },
+//     { name: "Renan Alves ",   des: "President",                              company: "Brazilian Data Centers Association ",                         day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/15.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/Brazilian-Data-Centers-Association.png" },
+//     { name: "Bruno Capuano",   des: "Principal Cloud Advocate",                              company: "Microsoft",                         day: "Day 1", photo: "https://gdcc-expo.com/wp-content/uploads/2026/06/16.png",  logo: "https://gdcc-expo.com/wp-content/uploads/2026/06/microsoft.png" },
+//   ];
+
+
+
+  let activeFilter = "All";
+  let searchQ = "";
+
+  const silSVG = `<svg viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="28" rx="18" ry="20" fill="white"/><ellipse cx="40" cy="90" rx="34" ry="28" fill="white"/></svg>`;
+  const logoSVG = `<svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="9" y1="15" x2="13" y2="15"/></svg>`;
+
+  function isVisible(spk) {
+    const q = searchQ.toLowerCase();
+    const m = !q || spk.name.toLowerCase().includes(q) || spk.company.toLowerCase().includes(q);
+    if (!m) return false;
+    if (activeFilter === "All") return true;
+    if (activeFilter === "Day 1") return spk.day === "Day 1";
+    if (activeFilter === "Day 2") return spk.day === "Day 2";
+    return true;
+  }
+
+  function buildFilters() {
+    const row = document.getElementById('gdccFilterRow');
+    const counts = {
+      "All": SPEAKERS.length,
+      "Day 1": SPEAKERS.filter(s => s.day === "Day 1").length,
+      "Day 2": SPEAKERS.filter(s => s.day === "Day 2").length,
+    };
+    const tabs = ["All", "Day 1", "Day 2"];
+    row.innerHTML = tabs.map(k =>
+      `<div class="spk-ftab${k===activeFilter?' active':''}" onclick="gdccSetFilter('${k}')">${k}<span class="cnt">${counts[k]}</span></div>`
+    ).join('');
+  }
+
+  window.gdccSetFilter = function(f) { activeFilter = f; buildFilters(); renderGrid(); };
+
+  function renderGrid() {
+    const grid = document.getElementById('gdccSpeakersGrid');
+    const noRes = document.getElementById('gdccNoResults');
+    const visible = SPEAKERS.filter(isVisible);
+    if (!visible.length) { grid.innerHTML = ''; noRes.classList.add('show'); return; }
+    noRes.classList.remove('show');
+
+    const padded = [...visible];
+    while (padded.length % 4 !== 0) padded.push(null);
+
+    grid.innerHTML = padded.map(spk => {
+      if (!spk) return `<div class="spk-card empty"></div>`;
+      return `
+<div class="spk-card">
+  <div class="spk-card-top">
+    <div class="spk-photo-box">
+      ${spk.photo ? `<img src="${spk.photo}" alt="${spk.name}" loading="lazy">` : `<div class="spk-dummy">${silSVG}</div>`}
+    </div>
+    <div class="spk-card-text">
+      <div class="spk-name">${spk.name}</div>
+      <div class="spk-divider"></div>
+      <div class="spk-des">${spk.des}</div>
+    </div>
+  </div>
+  <div class="spk-footer">
+    <div class="spk-logo-box">
+      ${spk.logo ? `<img src="${spk.logo}" alt="${spk.company} logo">` : logoSVG}
+    </div>
+    <div class="spk-company">${spk.company}</div>
+  </div>
+</div>`;
+    }).join('');
+  }
+
+  document.getElementById('gdccSearchInput').addEventListener('input', function () {
+    searchQ = this.value; renderGrid();
+  });
+
+//   buildFilters();
+//   renderGrid();
+})();
+</script>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDCC Expo Canada 2026 — Conference Programme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f0f2f5; color: #1a1a2e; }
+
+    .hdr {
+      background: #fff;
+      border-bottom: 2px solid #eee;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+      padding: 18px 32px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+    .hdr-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px; gap: 16px; flex-wrap: wrap;
+    }
+    .event-brand p {
+      font-size: 10px; font-weight: 700; color: #c0182e;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 3px; font-family: 'Inter', sans-serif;
+    }
+    .event-brand h2 {
+      font-size: clamp(15px,1.9vw,21px); font-weight: 400;
+      color: #1a1a2e; letter-spacing: 0.3px; font-family: 'Abel', sans-serif;
+    }
+    .date-tabs { display: flex; gap: 8px; flex-shrink: 0; }
+    .dtab {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 10px 24px; border-radius: 10px;
+      cursor: pointer; border: 1.5px solid #e0e0e0; background: #f9f9f9;
+      transition: all 0.25s; min-width: 96px;
+    }
+    .dtab:hover { border-color: #c0182e; background: #fff5f5; }
+    .dtab.active {
+      background: linear-gradient(135deg,#c0182e,#8a0018);
+      border-color: #c0182e;
+      box-shadow: 0 4px 18px rgba(192,24,46,0.28);
+    }
+    .dtab-day { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #aaa; font-family: 'Inter', sans-serif; }
+    .dtab.active .dtab-day { color: rgba(255,255,255,0.78); }
+    .dtab-date { font-size: 18px; font-weight: 400; color: #1a1a2e; line-height: 1.15; margin-top: 2px; font-family: 'Abel', sans-serif; }
+    .dtab.active .dtab-date { color: #fff; }
+    .dtab-arrow { font-size: 11px; margin-top: 4px; color: #aaa; transition: color 0.25s, transform 0.3s; display: block; line-height: 1; }
+    .dtab.active .dtab-arrow { color: rgba(255,255,255,0.8); transform: rotate(180deg); }
+    .dtab:hover .dtab-arrow { color: #c0182e; }
+
+    .cat-tabs { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 14px; scrollbar-width: none; }
+    .cat-tabs::-webkit-scrollbar { display: none; }
+    .cattab {
+      padding: 7px 16px; border-radius: 7px; cursor: pointer;
+      white-space: nowrap; border: 1.5px solid #e0e0e0; background: #fff;
+      color: #888; font-size: 12px; font-family: 'Abel', sans-serif;
+      letter-spacing: 0.5px; transition: all 0.2s; flex-shrink: 0;
+    }
+    .cattab:hover { border-color: #c0182e; color: #c0182e; background: #fff5f5; }
+    .cattab.active { background: #c0182e; border-color: #c0182e; color: #fff; font-weight: 600; }
+
+    .body { padding: 28px 32px 0; position: relative; z-index: 1; }
+    .day-panel { display: none; animation: fadeIn 0.35s ease; }
+    .day-panel.active { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    .day-title { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; }
+    .day-title h3 { font-size: clamp(15px,2.2vw,22px); font-weight: 400; color: #1a1a2e; font-family: 'Abel', sans-serif; letter-spacing: 0.3px; }
+    .day-title-line { flex: 1; height: 1.5px; background: linear-gradient(90deg,#c0182e,transparent); min-width: 30px; }
+    .day-title-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: #c0182e; padding: 4px 14px; border: 1.5px solid rgba(192,24,46,0.25);
+      border-radius: 20px; background: rgba(192,24,46,0.06); white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .timeline { position: relative; max-width: 1100px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 136px; top: 0; bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(to bottom,transparent,#ddd 5%,#ddd 95%,transparent);
+    }
+
+    .trow { display: flex; align-items: flex-start; margin-bottom: 10px; position: relative; }
+    .trow.hidden { display: none !important; }
+
+    .tlabel { width: 136px; flex-shrink: 0; padding: 22px 20px 0 0; text-align: right; position: relative; }
+    .tlabel-time { font-size: 20px; font-weight: 400; color: #1a1a2e; display: block; line-height: 1; font-family: 'Abel', sans-serif; }
+    .tlabel-sub { font-size: 12px; color: #c0182e; display: block; margin-top: 3px; font-weight: 600; font-family: 'Inter', sans-serif; }
+    .tdot {
+      position: absolute; right: -6px; top: 27px;
+      width: 11px; height: 11px; border-radius: 50%; background: #c0182e;
+      box-shadow: 0 0 0 3px #f0f2f5, 0 0 0 4.5px rgba(192,24,46,0.22);
+      transition: all 0.3s;
+    }
+
+    .scard {
+      flex: 1; margin-left: 28px; border-radius: 12px; overflow: hidden;
+      cursor: pointer; transition: all 0.28s cubic-bezier(0.25,0.8,0.25,1);
+      position: relative; background: #fff; border: 1px solid red;
+      box-shadow: 0 2px 12px rgba(192,24,46,0.06), inset 0 1px 0 rgba(255,255,255,1);
+    }
+    .scard::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3.5px;
+      background: linear-gradient(to bottom,#c0182e,#ff5a6a); border-radius: 12px 0 0 12px;
+    }
+    .scard:hover {
+      background: #fff; border-color: rgba(192,24,46,0.35);
+      transform: translateX(5px) translateY(-1px);
+      box-shadow: 0 8px 28px rgba(192,24,46,0.13);
+    }
+    .card-inner { display: flex; align-items: flex-start; padding: 18px 22px 18px 26px; }
+    .card-logo {
+      width: 76px; height: 76px; border-radius: 9px; flex-shrink: 0;
+      margin-right: 18px; background: rgba(192,24,46,0.06);
+      border: 1px solid rgba(192,24,46,0.16);
+      display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+    }
+    .card-logo-text {
+      font-size: 9px; font-weight: 700; color: rgba(192,24,46,0.55);
+      text-align: center; line-height: 1.45; padding: 8px;
+      letter-spacing: 0.6px; font-family: 'Inter', sans-serif; white-space: pre-line;
+    }
+    .scard:hover .card-logo { border-color: rgba(192,24,46,0.38); background: rgba(192,24,46,0.1); }
+    .card-content { flex: 1; min-width: 0; }
+    .ctype { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bbb; margin-bottom: 5px; transition: color 0.25s; font-family: 'Inter', sans-serif; }
+    .scard:hover .ctype { color: #c0182e; }
+    .ctitle { font-size: 18px; font-weight: 400; color: #1a1a2e; margin-bottom: 5px; line-height: 1.3; font-family: 'Abel', sans-serif; }
+    .ctloc { font-size: 13px; color: #999; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; flex-wrap: wrap; font-family: 'Inter', sans-serif; }
+    .ctloc .dot { color: #c0182e; }
+    .cbrief { font-size: 13px; color: #666; line-height: 1.65; margin-bottom: 10px; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.35s; opacity: 0; font-family: 'Inter', sans-serif; }
+    .scard:hover .cbrief { max-height: 150px; opacity: 1; }
+    .ctags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .ctag { padding: 3px 11px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; font-family: 'Inter', sans-serif; }
+    .ctag.red    { background: rgba(192,24,46,0.08);  border: 1px solid rgba(192,24,46,0.28);  color: #c0182e; }
+    .ctag.purple { background: rgba(110,45,195,0.07); border: 1px solid rgba(110,45,195,0.24); color: #6e2dc3; }
+    .ctag.teal   { background: rgba(14,148,134,0.07); border: 1px solid rgba(14,148,134,0.24); color: #0e9486; }
+    .ctag.amber  { background: rgba(195,125,0,0.07);  border: 1px solid rgba(195,125,0,0.24);  color: #c37d00; }
+    .ctag.blue   { background: rgba(28,96,210,0.07);  border: 1px solid rgba(28,96,210,0.24);  color: #1c60d2; }
+    .ctag.green  { background: rgba(25,148,55,0.07);  border: 1px solid rgba(25,148,55,0.24);  color: #199437; }
+    .ctag.navy   { background: rgba(26,26,46,0.07);   border: 1px solid rgba(26,26,46,0.24);   color: #1a1a2e; }
+
+    /* ── SPEAKERS ROW ── */
+    .cspeakers-row {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 10px; margin-top: 4px;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.4s; opacity: 0;
+    }
+    .scard:hover .cspeakers-row { max-height: 300px; opacity: 1; }
+
+    .spk-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f7f7f7; border: 1px solid #e8e8e8;
+      border-radius: 20px; padding: 4px 10px 4px 4px;
+      font-size: 11px; color: #444; font-family: 'Inter', sans-serif;
+      position: relative; cursor: default;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .spk-pill:hover { border-color: #c0182e; background: #fff5f5; }
+    .spk-pill img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; object-position: top; border: 1.5px solid #ddd; flex-shrink: 0; }
+    .spk-pill-name { font-weight: 600; color: #1a1a2e; line-height: 1.2; }
+
+    .spk-popup {
+      display: none; position: absolute;
+      bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      z-index: 9999; background: #fff;
+      border: 1.5px solid rgba(192,24,46,0.2); border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15), 0 2px 8px rgba(192,24,46,0.1);
+      padding: 14px; width: 200px; text-align: center; pointer-events: none;
+    }
+    .spk-pill:hover .spk-popup { display: block; }
+    .spk-popup img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid rgba(192,24,46,0.2); margin: 0 auto 10px; display: block; }
+    .spk-popup-name { font-size: 14px; font-weight: 700; color: #1a1a2e; font-family: 'Abel', sans-serif; letter-spacing: 0.3px; margin-bottom: 4px; line-height: 1.2; }
+    .spk-popup-des { font-size: 11px; color: #888; line-height: 1.5; font-family: 'Inter', sans-serif; margin-bottom: 6px; }
+    .spk-popup-divider { width: 30px; height: 2px; background: #c0182e; border-radius: 2px; margin: 0 auto; }
+    .spk-popup::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 7px solid transparent; border-top-color: #fff; }
+    .spk-popup::before { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 8px solid transparent; border-top-color: rgba(192,24,46,0.2); margin-top: 1px; }
+
+    /* ── BREAK ROW ── */
+    .break-row { display: flex; align-items: center; margin-bottom: 10px; position: relative; }
+    .break-dot { position: absolute; left: 131px; top: 50%; transform: translateY(-50%); width: 7px; height: 7px; border-radius: 50%; background: #ddd; border: 1.5px solid #ccc; }
+    .break-inner {
+      flex: 1; margin-left: 168px; padding: 10px 18px; background: #fff;
+      border: 1.5px dashed #e5e5e5; border-radius: 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .break-icon { font-size: 15px; opacity: .45; }
+    .break-text { font-size: 12px; color: #bbb; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-family: 'Abel', sans-serif; }
+    .break-time { font-size: 11px; color: #ccc; margin-left: auto; font-family: 'Inter', sans-serif; }
+
+    /* ── SECTION DIVIDER ── */
+    .sdiv { display: flex; align-items: center; gap: 12px; margin: 28px 0 16px; }
+    .sdiv-line { flex: 1; height: 1px; background: linear-gradient(90deg,transparent,#ddd,transparent); }
+    .sdiv-label { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #c0182e; padding: 4px 14px; border: 1px solid rgba(192,24,46,0.2); border-radius: 20px; background: rgba(192,24,46,0.05); white-space: nowrap; font-family: 'Inter', sans-serif; }
+
+    .no-results { text-align: center; padding: 60px 20px; color: #ccc; font-size: 16px; display: none; font-family: 'Abel', sans-serif; }
+    .no-results.show { display: block; }
+
+    .loading { text-align: center; padding: 80px 20px; font-family: 'Abel', sans-serif; font-size: 18px; color: #bbb; }
+    .loading-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #c0182e; margin: 0 3px; animation: loadBounce 1.2s infinite ease-in-out; }
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes loadBounce { 0%,80%,100% { transform:scale(0.6); opacity:0.4; } 40% { transform:scale(1); opacity:1; } }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px 32px 52px; gap: 12px; }
+    .bnav-btn { display: flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 12px; border: 1.5px solid rgba(192,24,46,0.25); background: #fff; cursor: pointer; transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 2px 10px rgba(192,24,46,0.07); user-select: none; }
+    .bnav-btn:hover { background: #c0182e; border-color: #c0182e; transform: translateY(-3px); box-shadow: 0 10px 26px rgba(192,24,46,0.25); }
+    .bnav-btn:hover .bnav-label, .bnav-btn:hover .bnav-sub, .bnav-btn:hover .bnav-arrow { color: #fff; }
+    .bnav-arrow { font-size: 22px; color: #c0182e; transition: color 0.25s; line-height: 1; font-weight: 300; }
+    .bnav-text { display: flex; flex-direction: column; }
+    .bnav-text.right { text-align: right; }
+    .bnav-sub { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #bbb; font-family: 'Inter', sans-serif; transition: color 0.25s; }
+    .bnav-label { font-size: 15px; font-weight: 400; color: #1a1a2e; font-family: 'Abel', sans-serif; letter-spacing: 0.3px; transition: color 0.25s; }
+    .bnav-spacer { flex: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .hdr { padding: 14px 20px 0; }
+      .hdr-top { flex-direction: column; gap: 12px; }
+      .body { padding: 20px 20px 0; }
+      .timeline::before { left: 116px; }
+      .tlabel { width: 116px; padding: 18px 14px 0 0; }
+      .tlabel-time { font-size: 18px; }
+      .tdot { right: -6px; top: 22px; }
+      .scard { margin-left: 22px; }
+      .card-inner { padding: 14px 16px 14px 20px; }
+      .card-logo { width: 66px; height: 66px; margin-right: 14px; }
+      .ctitle { font-size: 16px; }
+      .break-dot { left: 111px; }
+      .break-inner { margin-left: 142px; }
+      .bottom-nav { padding: 22px 20px 40px; }
+    }
+    @media(max-width:600px) {
+      .hdr { padding: 12px 14px 0; }
+      .body { padding: 14px 14px 0; }
+      .day-title { gap: 8px; margin-bottom: 18px; }
+      .timeline::before { display: none; }
+      .trow { flex-direction: column; margin-bottom: 12px; }
+      .tlabel { width: 100%; text-align: left; padding: 0 0 0 14px; display: flex; align-items: center; gap: 10px; border-left: 3px solid #c0182e; margin-bottom: 8px; }
+      .tlabel-time { font-size: 19px; }
+      .tlabel-sub { font-size: 11px; margin-top: 0; display: inline; }
+      .tdot { display: none; }
+      .scard { margin-left: 0; width: 100%; }
+      .scard:hover { transform: translateY(-2px); }
+      .card-inner { padding: 12px 14px 12px 18px; }
+      .card-logo { width: 58px; height: 58px; margin-right: 12px; }
+      .ctitle { font-size: 15px; }
+      .break-row { flex-direction: column; align-items: flex-start; }
+      .break-dot { display: none; }
+      .break-inner { margin-left: 0; width: 100%; }
+      .bottom-nav { padding: 18px 14px 36px; }
+      .bnav-btn { padding: 11px 16px; gap: 8px; }
+      .bnav-label { font-size: 13px; }
+      .spk-popup { width: 170px; }
+    }
+    @media(max-width:380px) {
+      .date-tabs { width: 100%; }
+      .dtab { flex: 1; }
+      .card-logo { display: none; }
+      .cat-tabs { gap: 4px; }
+      .cattab { padding: 6px 11px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div class="loading">
+    <div style="margin-bottom:16px">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+    Loading Programme...
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   CATEGORY CONFIG
+══════════════════════════════════════════ */
+const CATS = [
+  { id: 'all',      label: 'All Sessions' },
+  { id: 'keynote',  label: 'Keynotes' },
+  { id: 'panel',    label: 'Panels' },
+  { id: 'tech',     label: 'Tech Sessions' },
+  { id: 'cloud',    label: 'Cloud' },
+  { id: 'ai',       label: 'AI & Compute' },
+  { id: 'industry', label: 'Industry Cases' },
+  { id: 'security', label: 'Security' },
+  { id: 'energy',   label: 'Energy & Power' },
+];
+
+function getCats(type) {
+  const t = (type || '').toLowerCase();
+  const cats = [];
+  if (t.includes('keynote'))                                              cats.push('keynote');
+  if (t.includes('panel') || t.includes('roundtable') ||
+      t.includes('dialogue') || t.includes('briefing') ||
+      t.includes('forum') || t.includes('outlook') ||
+      t.includes('closing') || t.includes('address'))                    cats.push('panel');
+  if (t.includes('tech') || t.includes('deep dive') ||
+      t.includes('think tank') || t.includes('twin'))                    cats.push('tech');
+  if (t.includes('cloud') || t.includes('architecture') ||
+      t.includes('finops') || t.includes('spotlight'))                   cats.push('cloud');
+  if (t.includes('ai') || t.includes('compute') ||
+      t.includes('llm') || t.includes('gpu'))                            cats.push('ai');
+  if (t.includes('industry') || t.includes('investment') ||
+      t.includes('medtech') || t.includes('telecom') ||
+      t.includes('premier') || t.includes('experience'))                 cats.push('industry');
+  if (t.includes('security') || t.includes('zero trust') ||
+      t.includes('trust'))                                                cats.push('security');
+  if (t.includes('energy') || t.includes('power') ||
+      t.includes('cooling') || t.includes('green') ||
+      t.includes('sustain'))                                              cats.push('energy');
+  if (!cats.length) cats.push('panel');
+  return cats;
+}
+
+function getTags(type) {
+  const t = (type || '').toLowerCase();
+  if (t.includes('keynote'))                    return [{label:'Keynote',color:'red'},{label:'Main Stage',color:'blue'}];
+  if (t.includes('panel'))                      return [{label:'Panel',color:'purple'},{label:'Discussion',color:'teal'}];
+  if (t.includes('roundtable'))                 return [{label:'Roundtable',color:'amber'},{label:'Leaders',color:'blue'}];
+  if (t.includes('tech') || t.includes('deep')) return [{label:'Technical',color:'blue'},{label:'Deep Dive',color:'teal'}];
+  if (t.includes('cloud'))                      return [{label:'Cloud',color:'blue'},{label:'Infrastructure',color:'teal'}];
+  if (t.includes('security'))                   return [{label:'Security',color:'red'},{label:'Zero Trust',color:'purple'}];
+  if (t.includes('energy'))                     return [{label:'Energy',color:'amber'},{label:'Power',color:'green'}];
+  if (t.includes('industry'))                   return [{label:'Industry',color:'navy'},{label:'Case Study',color:'purple'}];
+  return [{label:'Session',color:'red'}];
+}
+
+/* ══════════════════════════════════════════
+   BREAKS — exact same as old hardcoded code
+   sort_order positions from old DATA object
+══════════════════════════════════════════ */
+const BREAKS = {
+  'Day 1': [
+    { afterSortOrder: 3,  break: true, label: 'Break', time: '11:00 – 11:20' },
+    { afterSortOrder: 6,  break: true, label: 'Lunch', time: '12:50 – 13:40' },
+    { afterSortOrder: 9,  break: true, label: 'Break', time: '14:50 – 15:05' },
+  ],
+  'Day 2': [
+    { afterSortOrder: 3,  break: true, label: 'Break', time: '11:00 – 11:20' },
+    { afterSortOrder: 6,  break: true, label: 'Lunch', time: '12:35 – 13:15' },
+    { afterSortOrder: 10, break: true, label: 'Break', time: '14:55 – 15:15' },
+  ],
+};
+
+/* ══════════════════════════════════════════
+   TRANSFORM API → UI DATA (with breaks)
+══════════════════════════════════════════ */
+function transformAgenda(apiRows) {
+  const day1 = apiRows.filter(r => r.day === 'Day 1').sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
+  const day2 = apiRows.filter(r => r.day === 'Day 2').sort((a,b) => (a.sort_order||0)-(b.sort_order||0));
+
+  function buildSections(rows, dayLabel) {
+    if (!rows.length) return [];
+
+    const breaks = BREAKS[dayLabel] || [];
+    const items = []; // flat list: session objects + break markers
+
+    rows.forEach(row => {
+      // push the session
+      items.push({
+        isBreak: false,
+        type:    row.type || 'Session',
+        logo:    (row.type || 'SESSION').toUpperCase(),
+        title:   row.title || '',
+        time:    (row.time_slot || '').split(/[-–]/)[0].trim(),
+        timeTo:  (row.time_slot || '').split(/[-–]/)[1]?.trim() || '',
+        stage:   row.room ? 'Room ' + row.room : 'Main Stage',
+        brief:   row.description || '',
+        speakersData: Array.isArray(row.speakers) ? row.speakers : [],
+        cats:    getCats(row.type),
+        tags:    getTags(row.type),
+        sort_order: row.sort_order || 0,
+      });
+
+      // check if a break should follow this sort_order
+      const brk = breaks.find(b => b.afterSortOrder === (row.sort_order || 0));
+      if (brk) {
+        items.push({ isBreak: true, label: brk.label, time: brk.time });
+      }
+    });
+
+    // Wrap everything in a single section (no sub-labels from API)
+    return [{ label: null, sessions: items }];
+  }
+
+  return {
+    event: {
+      name:     "GLOBAL DATA CENTRE & CLOUD EXPO — CANADA 2026",
+      subtitle: "Powering the Digital Future"
+    },
+    days: [
+      {
+        label: "Day 1", day: "TUE", date: "20 Oct",
+        theme: "Compute, Power, Scale: Building Data Centres for the AI Age",
+        sections: buildSections(day1, 'Day 1')
+      },
+      {
+        label: "Day 2", day: "WED", date: "21 Oct",
+        theme: "From Steel & Servers to Sectoral Transformation",
+        sections: buildSections(day2, 'Day 2')
+      }
+    ]
+  };
+}
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let DATA       = null;
+let currentDay = 0;
+let currentCat = 'all';
+
+/* ══════════════════════════════════════════
+   FETCH
+══════════════════════════════════════════ */
+fetch('https://gdcc-expo.com/gdcc-admin/api.php?type=agenda')
+  .then(res => res.json())
+  .then(apiData => {
+    DATA = transformAgenda(apiData);
+    buildApp();
+    renderBottomNav();
+  })
+  .catch(err => {
+    console.error('Agenda API Error:', err);
+    document.getElementById('app').innerHTML =
+      '<p style="text-align:center;padding:60px 20px;color:#c0182e;font-family:Abel,sans-serif;font-size:18px">⚠️ Failed to load agenda. Please refresh.</p>';
+  });
+
+/* ══════════════════════════════════════════
+   BUILD APP
+══════════════════════════════════════════ */
+function buildApp() {
+  document.getElementById('app').innerHTML = `
+    <div class="hdr">
+      <div class="hdr-top">
+        <div class="event-brand">
+          <p>${DATA.event.name}</p>
+          <h2>${DATA.event.subtitle}</h2>
+        </div>
+        <div class="date-tabs" id="dateTabs">
+          ${DATA.days.map((d,i) => `
+            <div class="dtab${i===0?' active':''}" onclick="switchDay(${i},this)">
+              <span class="dtab-day">${d.day}</span>
+              <span class="dtab-date">${d.date}</span>
+              <span class="dtab-arrow">▼</span>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="cat-tabs">
+        ${CATS.map(c => `
+          <div class="cattab${c.id==='all'?' active':''}" onclick="filterCat('${c.id}',this)">
+            ${c.label}
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="body" id="body">
+      ${DATA.days.map((day,di) => `
+        <div class="day-panel${di===0?' active':''}" id="day${di}">
+          <div class="day-title">
+            <div class="day-title-badge">${day.label} · ${day.date} 2026</div>
+            <div class="day-title-line"></div>
+            <h3>${day.theme}</h3>
+          </div>
+          <div class="timeline">
+            ${renderSections(day.sections)}
+          </div>
+          <div class="no-results" id="no${di}">No sessions match your filter.</div>
+        </div>`).join('')}
+    </div>
+    <div class="bottom-nav" id="bottomNav"></div>`;
+}
+
+/* ══════════════════════════════════════════
+   RENDER SECTIONS — handles both sessions & breaks in items[]
+══════════════════════════════════════════ */
+function renderSections(sections) {
+  return sections.map(sec => {
+    if (sec.break) return renderBreak(sec);
+    const inner = sec.sessions.map(item =>
+      item.isBreak ? renderBreak(item) : renderSession(item)
+    ).join('');
+    return `
+      ${sec.label ? `<div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">${sec.label}</div><div class="sdiv-line"></div></div>` : ''}
+      ${inner}`;
+  }).join('');
+}
+
+function renderBreak(b) {
+  return `
+    <div class="break-row">
+      <div class="break-dot"></div>
+      <div class="break-inner">
+        <span class="break-icon">${b.label === 'Lunch' ? '🍽️' : '☕'}</span>
+        <span class="break-text">${b.label}</span>
+        <span class="break-time">${b.time}</span>
+      </div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════
+   RENDER SESSION
+══════════════════════════════════════════ */
+function renderSession(s) {
+  const catsStr = s.cats.join(' ');
+  const tags    = s.tags.map(t => `<span class="ctag ${t.color}">${t.label}</span>`).join('');
+
+  const speakerPills = (s.speakersData || []).map(spk => {
+    const photo    = spk.photo ? (spk.photo.startsWith('http') ? spk.photo : 'https://gdcc-expo.com' + spk.photo) : '';
+    const imgThumb = photo
+      ? `<img src="${photo}" alt="${spk.name}" loading="lazy">`
+      : `<span style="width:22px;height:22px;border-radius:50%;background:#ddd;display:inline-block;flex-shrink:0"></span>`;
+    const imgBig = photo
+      ? `<img src="${photo}" alt="${spk.name}" loading="lazy">`
+      : `<div style="width:72px;height:72px;border-radius:50%;background:#eee;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px">👤</div>`;
+    return `
+      <div class="spk-pill">
+        ${imgThumb}
+        <span class="spk-pill-name">${spk.name}</span>
+        <div class="spk-popup">
+          ${imgBig}
+          <div class="spk-popup-name">${spk.name}</div>
+          <div class="spk-popup-des">${spk.designation || ''}</div>
+          <div class="spk-popup-divider"></div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const speakersHtml = s.speakersData && s.speakersData.length
+    ? `<div class="cspeakers-row">${speakerPills}</div>` : '';
+
+  return `
+    <div class="trow" data-cats="${catsStr}">
+      <div class="tlabel">
+        <div class="tdot"></div>
+        <span class="tlabel-time">${s.time}</span>
+        <span class="tlabel-sub">– ${s.timeTo}</span>
+      </div>
+      <div class="scard">
+        <div class="card-inner">
+          <div class="card-logo"><div class="card-logo-text">${s.logo}</div></div>
+          <div class="card-content">
+            <div class="ctype">${s.type}</div>
+            <div class="ctitle">${s.title}</div>
+            <div class="ctloc">${s.time} – ${s.timeTo} <span class="dot">•</span> ${s.stage}</div>
+            <div class="cbrief">${s.brief}</div>
+            ${speakersHtml}
+            <div class="ctags">${tags}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════
+   BOTTOM NAV
+══════════════════════════════════════════ */
+function renderBottomNav() {
+  const nav = document.getElementById('bottomNav');
+  if (!nav || !DATA) return;
+  const days = DATA.days;
+  let html = '';
+  if (currentDay > 0) {
+    const prev = days[currentDay-1];
+    html += `
+      <div class="bnav-btn" onclick="switchDay(${currentDay-1},document.querySelectorAll('.dtab')[${currentDay-1}])">
+        <span class="bnav-arrow">←</span>
+        <div class="bnav-text">
+          <span class="bnav-sub">Previous</span>
+          <span class="bnav-label">${prev.label} · ${prev.date}</span>
+        </div>
+      </div>`;
+  } else { html += `<div class="bnav-spacer"></div>`; }
+
+  if (currentDay < days.length-1) {
+    const next = days[currentDay+1];
+    html += `
+      <div class="bnav-btn" onclick="switchDay(${currentDay+1},document.querySelectorAll('.dtab')[${currentDay+1}])">
+        <div class="bnav-text right">
+          <span class="bnav-sub">Next</span>
+          <span class="bnav-label">${next.label} · ${next.date}</span>
+        </div>
+        <span class="bnav-arrow">→</span>
+      </div>`;
+  } else { html += `<div class="bnav-spacer"></div>`; }
+
+  nav.innerHTML = html;
+}
+
+/* ══════════════════════════════════════════
+   SWITCH DAY
+══════════════════════════════════════════ */
+function switchDay(d, el) {
+  currentDay = d;
+  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('day'+d).classList.add('active');
+  applyFilters();
+  renderBottomNav();
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+/* ══════════════════════════════════════════
+   FILTER
+══════════════════════════════════════════ */
+function filterCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.cattab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters() {
+  const panel = document.getElementById('day'+currentDay);
+  if (!panel) return;
+  const rows = panel.querySelectorAll('.trow');
+  let vis = 0;
+  rows.forEach(row => {
+    const cats = (row.dataset.cats || '').split(' ');
+    const ok = currentCat === 'all' || cats.includes(currentCat);
+    row.classList.toggle('hidden', !ok);
+    if (ok) vis++;
+  });
+  document.getElementById('no'+currentDay).classList.toggle('show', vis===0);
+}
+</script>
+</body>
+</html>

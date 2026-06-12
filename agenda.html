@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDCC Expo Canada 2026 — Conference Programme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+    }
+
+    .hdr {
+      background: #fff;
+      border-bottom: 2px solid #eee;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+      padding: 18px 32px 0;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .hdr-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .event-brand p {
+      font-size: 10px;
+      font-weight: 700;
+      color: #c0182e;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .event-brand h2 {
+      font-size: clamp(15px, 1.9vw, 21px);
+      font-weight: 400;
+      color: #1a1a2e;
+      letter-spacing: 0.3px;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .date-tabs {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .dtab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1.5px solid #e0e0e0;
+      background: #f9f9f9;
+      transition: all 0.25s;
+      min-width: 96px;
+      position: relative;
+    }
+
+    .dtab:hover { border-color: #c0182e; background: #fff5f5; }
+
+    .dtab.active {
+      background: linear-gradient(135deg, #c0182e, #8a0018);
+      border-color: #c0182e;
+      box-shadow: 0 4px 18px rgba(192,24,46,0.28);
+    }
+
+    .dtab-day {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #aaa;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dtab.active .dtab-day { color: rgba(255,255,255,0.78); }
+
+    .dtab-date {
+      font-size: 18px;
+      font-weight: 400;
+      color: #1a1a2e;
+      line-height: 1.15;
+      margin-top: 2px;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .dtab.active .dtab-date { color: #fff; }
+
+    .dtab-arrow {
+      font-size: 11px;
+      margin-top: 4px;
+      color: #aaa;
+      transition: color 0.25s, transform 0.3s;
+      display: block;
+      line-height: 1;
+    }
+
+    .dtab.active .dtab-arrow {
+      color: rgba(255,255,255,0.8);
+      transform: rotate(180deg);
+    }
+
+    .dtab:hover .dtab-arrow { color: #c0182e; }
+
+    .cat-tabs {
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scrollbar-width: none;
+    }
+
+    .cat-tabs::-webkit-scrollbar { display: none; }
+
+    .cattab {
+      padding: 7px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      white-space: nowrap;
+      border: 1.5px solid #e0e0e0;
+      background: #fff;
+      color: red;
+      font-size: 12px;
+      font-family: 'Abel', sans-serif;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .cattab:hover { border-color: #c0182e; color: #c0182e; background: #fff5f5; }
+
+    .cattab.active {
+      background: #c0182e;
+      border-color: #c0182e;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .body {
+      padding: 28px 32px 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .day-panel { display: none; animation: fadeIn 0.35s ease; }
+    .day-panel.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .day-title h3 {
+      font-size: clamp(15px, 2.2vw, 22px);
+      font-weight: 400;
+      color: #1a1a2e;
+      font-family: 'Abel', sans-serif;
+      letter-spacing: 0.3px;
+    }
+
+    .day-title-line {
+      flex: 1;
+      height: 1.5px;
+      background: linear-gradient(90deg, #c0182e, transparent);
+      min-width: 30px;
+    }
+
+    .day-title-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c0182e;
+      padding: 4px 14px;
+      border: 1.5px solid rgba(192,24,46,0.25);
+      border-radius: 20px;
+      background: rgba(192,24,46,0.06);
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .timeline { position: relative; max-width: 1100px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 136px;
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(to bottom, transparent, #ddd 5%, #ddd 95%, transparent);
+    }
+
+    .trow {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .trow.hidden { display: none !important; }
+
+    .tlabel {
+      width: 136px;
+      flex-shrink: 0;
+      padding: 22px 20px 0 0;
+      text-align: right;
+      position: relative;
+    }
+
+    .tlabel-time {
+      font-size: 20px;
+      font-weight: 400;
+      color: #1a1a2e;
+      display: block;
+      line-height: 1;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .tlabel-sub {
+      font-size: 12px;
+      color: #c0182e;
+      display: block;
+      margin-top: 3px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .tdot {
+      position: absolute;
+      right: -6px;
+      top: 27px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #c0182e;
+      box-shadow: 0 0 0 3px #f0f2f5, 0 0 0 4.5px rgba(192,24,46,0.22);
+      transition: all 0.3s;
+    }
+
+    .scard {
+      flex: 1;
+      margin-left: 28px;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.25,0.8,0.25,1);
+      position: relative;
+      background: #ffffff;
+      border: 1px solid red;
+      box-shadow: 0 2px 12px rgba(192,24,46,0.06), inset 0 1px 0 rgba(255,255,255,1);
+    }
+
+    .scard::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3.5px;
+      background: linear-gradient(to bottom, #c0182e, #ff5a6a);
+      border-radius: 12px 0 0 12px;
+    }
+
+    .scard:hover {
+      background: #fff;
+      border-color: rgba(192,24,46,0.35);
+      transform: translateX(5px) translateY(-1px);
+      box-shadow: 0 8px 28px rgba(192,24,46,0.13);
+    }
+
+    .card-inner {
+      display: flex;
+      align-items: flex-start;
+      padding: 18px 22px 18px 26px;
+    }
+
+    .card-logo {
+      width: 76px;
+      height: 76px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      margin-right: 18px;
+      background: rgba(192,24,46,0.06);
+      border: 1px solid rgba(192,24,46,0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .card-logo-text {
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(192,24,46,0.55);
+      text-align: center;
+      line-height: 1.45;
+      padding: 8px;
+      letter-spacing: 0.6px;
+      font-family: 'Inter', sans-serif;
+      white-space: pre-line;
+    }
+
+    .scard:hover .card-logo {
+      border-color: rgba(192,24,46,0.38);
+      background: rgba(192,24,46,0.1);
+    }
+
+    .card-content { flex: 1; min-width: 0; }
+
+    .ctype {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 5px;
+      transition: color 0.25s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .scard:hover .ctype { color: #c0182e; }
+
+    .ctitle {
+      font-size: 18px;
+      font-weight: 400;
+      color: #1a1a2e;
+      margin-bottom: 5px;
+      line-height: 1.3;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .ctloc {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .ctloc .dot { color: #c0182e; }
+
+    .cbrief {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.65;
+      margin-bottom: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.35s;
+      opacity: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .scard:hover .cbrief { max-height: 150px; opacity: 1; }
+
+    .cspeakers {
+      font-size: 12px;
+      color: #aaa;
+      font-style: italic;
+      margin-bottom: 10px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.35s;
+      opacity: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .scard:hover .cspeakers { max-height: 60px; opacity: 1; }
+
+    .ctags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+    .ctag {
+      padding: 3px 11px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .ctag.red    { background: rgba(192,24,46,0.08);  border: 1px solid rgba(192,24,46,0.28);  color: #c0182e; }
+    .ctag.purple { background: rgba(110,45,195,0.07); border: 1px solid rgba(110,45,195,0.24); color: #6e2dc3; }
+    .ctag.teal   { background: rgba(14,148,134,0.07); border: 1px solid rgba(14,148,134,0.24); color: #0e9486; }
+    .ctag.amber  { background: rgba(195,125,0,0.07);  border: 1px solid rgba(195,125,0,0.24);  color: #c37d00; }
+    .ctag.blue   { background: rgba(28,96,210,0.07);  border: 1px solid rgba(28,96,210,0.24);  color: #1c60d2; }
+    .ctag.green  { background: rgba(25,148,55,0.07);  border: 1px solid rgba(25,148,55,0.24);  color: #199437; }
+    .ctag.navy   { background: rgba(26,26,46,0.07);   border: 1px solid rgba(26,26,46,0.24);   color: #1a1a2e; }
+
+    .break-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .break-dot {
+      position: absolute;
+      left: 131px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ddd;
+      border: 1.5px solid #ccc;
+    }
+
+    .break-inner {
+      flex: 1;
+      margin-left: 168px;
+      padding: 10px 18px;
+      background: #fff;
+      border: 1.5px dashed #e5e5e5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .break-icon { font-size: 15px; opacity: .45; }
+
+    .break-text {
+      font-size: 12px;
+      color: #bbb;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .break-time {
+      font-size: 11px;
+      color: #ccc;
+      margin-left: auto;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .sdiv {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0 16px;
+    }
+
+    .sdiv-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+    }
+
+    .sdiv-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #c0182e;
+      padding: 4px 14px;
+      border: 1px solid rgba(192,24,46,0.2);
+      border-radius: 20px;
+      background: rgba(192,24,46,0.05);
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: #ccc;
+      font-size: 16px;
+      display: none;
+      font-family: 'Abel', sans-serif;
+    }
+
+    .no-results.show { display: block; }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 32px 52px;
+      gap: 12px;
+    }
+
+    .bnav-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 26px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(192,24,46,0.25);
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 2px 10px rgba(192,24,46,0.07);
+      user-select: none;
+    }
+
+    .bnav-btn:hover {
+      background: #c0182e;
+      border-color: #c0182e;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 26px rgba(192,24,46,0.25);
+    }
+
+    .bnav-btn:hover .bnav-label,
+    .bnav-btn:hover .bnav-sub,
+    .bnav-btn:hover .bnav-arrow { color: #fff; }
+
+    .bnav-arrow {
+      font-size: 22px;
+      color: #c0182e;
+      transition: color 0.25s;
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    .bnav-text { display: flex; flex-direction: column; }
+    .bnav-text.right { text-align: right; }
+
+    .bnav-sub {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #bbb;
+      font-family: 'Inter', sans-serif;
+      transition: color 0.25s;
+    }
+
+    .bnav-label {
+      font-size: 15px;
+      font-weight: 400;
+      color: #1a1a2e;
+      font-family: 'Abel', sans-serif;
+      letter-spacing: 0.3px;
+      transition: color 0.25s;
+    }
+
+    .bnav-spacer { flex: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .hdr { padding: 14px 20px 0; }
+      .hdr-top { flex-direction: column; gap: 12px; }
+      .body { padding: 20px 20px 0; }
+      .timeline::before { left: 116px; }
+      .tlabel { width: 116px; padding: 18px 14px 0 0; }
+      .tlabel-time { font-size: 18px; }
+      .tdot { right: -6px; top: 22px; }
+      .scard { margin-left: 22px; }
+      .card-inner { padding: 14px 16px 14px 20px; }
+      .card-logo { width: 66px; height: 66px; margin-right: 14px; }
+      .ctitle { font-size: 16px; }
+      .break-dot { left: 111px; }
+      .break-inner { margin-left: 142px; }
+      .bottom-nav { padding: 22px 20px 40px; }
+    }
+
+    @media(max-width:600px) {
+      .hdr { padding: 12px 14px 0; }
+      .body { padding: 14px 14px 0; }
+      .day-title { gap: 8px; margin-bottom: 18px; }
+      .timeline::before { display: none; }
+      .trow { flex-direction: column; margin-bottom: 12px; }
+      .tlabel {
+        width: 100%;
+        text-align: left;
+        padding: 0 0 0 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-left: 3px solid #c0182e;
+        margin-bottom: 8px;
+      }
+      .tlabel-time { font-size: 19px; }
+      .tlabel-sub { font-size: 11px; margin-top: 0; display: inline; }
+      .tdot { display: none; }
+      .scard { margin-left: 0; width: 100%; }
+      .scard:hover { transform: translateY(-2px); }
+      .card-inner { padding: 12px 14px 12px 18px; }
+      .card-logo { width: 58px; height: 58px; margin-right: 12px; }
+      .ctitle { font-size: 15px; }
+      .break-row { flex-direction: column; align-items: flex-start; }
+      .break-dot { display: none; }
+      .break-inner { margin-left: 0; width: 100%; }
+      .bottom-nav { padding: 18px 14px 36px; }
+      .bnav-btn { padding: 11px 16px; gap: 8px; }
+      .bnav-label { font-size: 13px; }
+    }
+
+    @media(max-width:380px) {
+      .date-tabs { width: 100%; }
+      .dtab { flex: 1; }
+      .card-logo { display: none; }
+      .cat-tabs { gap: 4px; }
+      .cattab { padding: 6px 11px; font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    const DATA = {
+      event: {
+        name: "GLOBAL DATA CENTRE & CLOUD EXPO — CANADA 2026",
+        subtitle: "Powering the Digital Future"
+      },
+      days: [
+        {
+          label: "Day 1",
+          day: "TUE",
+          date: "20 Oct",
+          theme: "Compute, Power, Scale: Building Data Centres for the AI Age",
+          sections: [
+            {
+              label: "AI & Compute Sessions",
+              sessions: [
+                {
+                  type: "Opening Keynote Address",
+                  logo: "OPENING\nKEYNOTE",
+                  title: "Data Centre Meets AI: Canada's Digital Continuum",
+                  time: "10:00", timeTo: "10:15", stage: "Main Stage",
+                  brief: "This session will explore the convergence of hyperscale data centre infrastructure with AI workloads, focusing on high-density compute clusters, advanced interconnects, and Canada's role in enabling full-stack AI lifecycle deployment.",
+                  speakers: "", cats: ["keynote","ai"],
+                  tags: [{label:"Keynote",color:"red"},{label:"AI Infrastructure",color:"blue"},{label:"Physical",color:"teal"}]
+                },
+                {
+                  type: "Opening Signature Address",
+                  logo: "SIGNATURE\nADDRESS",
+                  title: "The Canadian Blueprint: AI, Cloud & The Future of Digital Infrastructure",
+                  time: "10:15", timeTo: "10:25", stage: "Main Stage",
+                  brief: "This session will explore how AI, cloud, hyperscale data centres, and sovereign digital infrastructure are reshaping Canada's future digital economy and global technology leadership.",
+                  speakers: "", cats: ["keynote","ai"],
+                  tags: [{label:"Sovereign AI",color:"purple"},{label:"Policy",color:"red"},{label:"Physical",color:"teal"}]
+                },
+                {
+                  type: "Mainstage Dialogue Panel",
+                  logo: "MAINSTAGE\nPANEL",
+                  title: "From LLMs to ROI: Operationalizing AI for Data Centres of the Future",
+                  time: "10:25", timeTo: "11:00", stage: "Main Stage",
+                  brief: "This session will explore how AI workloads, GPU infrastructure, automation, and intelligent compute optimization are transforming the next generation of hyperscale and enterprise data centres.",
+                  speakers: "", cats: ["panel","ai"],
+                  tags: [{label:"Enterprise AI",color:"red"},{label:"MLOps",color:"amber"},{label:"GPU",color:"blue"}]
+                }
+              ]
+            },
+            { break: true, label: "Break", time: "11:00 – 11:20" },
+            {
+              label: null,
+              sessions: [
+                {
+                  type: "Executive Dialogue",
+                  logo: "EXECUTIVE\nDIALOGUE",
+                  title: "Trust by Design: Governing AI Across Enterprise Infrastructure",
+                  time: "11:20", timeTo: "11:50", stage: "Conference Stage",
+                  brief: "This session will explore AI governance frameworks, compliance architectures, model transparency, and risk management strategies required to build trusted, secure, and accountable enterprise AI ecosystems.",
+                  speakers: "", cats: ["panel","ai","security"],
+                  tags: [{label:"AI Governance",color:"purple"},{label:"Compliance",color:"red"},{label:"Explainability",color:"teal"}]
+                },
+                {
+                  type: "Systems Roundtable",
+                  logo: "SYSTEMS\nROUNDTABLE",
+                  title: "From Utility to Uptime: Powering the Next Era of Hyperscale & AI Infrastructure",
+                  time: "11:50", timeTo: "12:20", stage: "Conference Stage",
+                  brief: "This session will explore next-generation power architectures for hyperscale AI data centres, including grid integration, substations, energy resilience, high-density compute, and scalable infrastructure strategies powering the AI economy.",
+                  speakers: "", cats: ["panel","energy"],
+                  tags: [{label:"Power Infra",color:"amber"},{label:"Renewables",color:"teal"},{label:"Grid",color:"blue"}]
+                },
+                {
+                  type: "Technical Deep Dive Session",
+                  logo: "TECH\nDEEP DIVE",
+                  title: "Digi Capacity & Power Zones: The New Real Estate Playbook",
+                  time: "12:20", timeTo: "12:50", stage: "Tech Stage",
+                  brief: "This session explores how new age critical infrastructure driven demand is reshaping real estate through power access, strategic site selection, and the rise of next-generation digital infrastructure corridors.",
+                  speakers: "", cats: ["tech","energy"],
+                  tags: [{label:"Edge AI",color:"blue"},{label:"Inference",color:"red"},{label:"Real-Time",color:"teal"}]
+                }
+              ]
+            },
+            { break: true, label: "Lunch", time: "12:50 – 13:40" },
+            {
+              label: "Cloud & Infrastructure Sessions",
+              sessions: [
+                {
+                  type: "Critical Keynote Address",
+                  logo: "CRITICAL\nKEYNOTE",
+                  title: "Cloud Without Borders: Architecting Canada's Sovereign Digital Future",
+                  time: "13:40", timeTo: "13:50", stage: "Main Stage",
+                  brief: "This session will explore sovereign cloud architectures, data localization strategies, secure cross-border data exchange, and compliance-driven infrastructure design.",
+                  speakers: "", cats: ["keynote","cloud"],
+                  tags: [{label:"Sovereign Cloud",color:"red"},{label:"Data Residency",color:"purple"},{label:"Physical",color:"teal"}]
+                },
+                {
+                  type: "Architecture's Forum",
+                  logo: "ARCHITECTURE\nFORUM",
+                  title: "Multi-Cloud, Hybrid, or Chaos? Designing Resilient Architectures",
+                  time: "13:50", timeTo: "14:20", stage: "Main Stage",
+                  brief: "This session will explore workload portability, orchestration across multi-cloud environments, resilience engineering, and strategies to mitigate vendor lock-in.",
+                  speakers: "", cats: ["panel","cloud"],
+                  tags: [{label:"Multi-Cloud",color:"blue"},{label:"Hybrid",color:"amber"},{label:"Resilience",color:"red"}]
+                },
+                {
+                  type: "Spotlight Session",
+                  logo: "SPOTLIGHT\nSESSION",
+                  title: "FinOps & Digital Banking: Optimising Cloud Economics for Canada's Financial Institutions",
+                  time: "14:20", timeTo: "14:50", stage: "Tech Stage",
+                  brief: "This session will explore cost observability, cloud resource optimization, financial governance frameworks, and real-time cost control mechanisms in large-scale financial environments.",
+                  speakers: "", cats: ["tech","cloud"],
+                  tags: [{label:"FinOps",color:"amber"},{label:"Cloud Cost",color:"blue"},{label:"Governance",color:"teal"}]
+                }
+              ]
+            },
+            { break: true, label: "Break", time: "14:50 – 15:05" },
+            {
+              label: null,
+              sessions: [
+                {
+                  type: "Strategic Briefing",
+                  logo: "STRATEGIC\nBRIEFING",
+                  title: "Zero Trust, Zero Breach: Securing the Cloud-Native Enterprise",
+                  time: "15:05", timeTo: "15:30", stage: "Main Stage",
+                  brief: "This session will explore zero trust architectures, identity-based security models, micro-segmentation, and continuous authentication across distributed systems.",
+                  speakers: "", cats: ["panel","security","cloud"],
+                  tags: [{label:"Zero Trust",color:"red"},{label:"Security",color:"purple"},{label:"Identity",color:"blue"}]
+                },
+                {
+                  type: "Next-Gen Tech Perspective",
+                  logo: "NEXT-GEN\nTECH",
+                  title: "The New Wave of Modular Data Centre Models",
+                  time: "15:30", timeTo: "15:55", stage: "Tech Stage",
+                  brief: "This session is exploring the rise of next-generation data centres embedded across emerging infrastructure ecosystems.",
+                  speakers: "", cats: ["tech","cloud"],
+                  tags: [{label:"Edge Computing",color:"teal"},{label:"Low Latency",color:"blue"},{label:"Real-Time",color:"red"}]
+                },
+                {
+                  type: "The Ultimate Outlook",
+                  logo: "ULTIMATE\nOUTLOOK",
+                  title: "From Data Lakes to Decision Engines: The Future of Intelligent Cloud",
+                  time: "15:50", timeTo: "16:00", stage: "Main Stage",
+                  brief: "This session will explore the evolution of data platforms into AI-driven decision systems, including real-time analytics, autonomous pipelines, and intelligent orchestration layers.",
+                  speakers: "", cats: ["panel","cloud","ai"],
+                  tags: [{label:"Intelligent Cloud",color:"red"},{label:"Data Platforms",color:"purple"},{label:"Analytics",color:"amber"}]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          label: "Day 2",
+          day: "WED",
+          date: "21 Oct",
+          theme: "From Steel & Servers to Sectoral Transformation",
+          sections: [
+            {
+              label: "Data Centre & Infrastructure",
+              sessions: [
+                {
+                  type: "Opening Keynote Address",
+                  logo: "OPENING\nKEYNOTE",
+                  title: "The Silent Giants: Data Centres Powering Canada's Digital Identity",
+                  time: "10:00", timeTo: "10:15", stage: "Main Stage",
+                  brief: "This session will explore the role of data centres in enabling national digital infrastructure, including identity systems, secure data exchange, and large-scale public digital platforms.",
+                  speakers: "", cats: ["keynote","ai"],
+                  tags: [{label:"Keynote",color:"red"},{label:"Digital Identity",color:"blue"},{label:"Physical",color:"teal"}]
+                },
+                {
+                  type: "Flagship Address",
+                  logo: "FLAGSHIP\nADDRESS",
+                  title: "Beyond Racks & Power: The Rise of Intelligent Data Centres",
+                  time: "10:15", timeTo: "10:25", stage: "Main Stage",
+                  brief: "This session will explore AI-driven data centre operations, predictive maintenance, automation, and the use of digital twins for infrastructure optimization.",
+                  speakers: "", cats: ["keynote","ai"],
+                  tags: [{label:"Digital Twins",color:"purple"},{label:"AI Ops",color:"red"},{label:"Automation",color:"blue"}]
+                },
+                {
+                  type: "The Apex Roundtable",
+                  logo: "APEX\nROUNDTABLE",
+                  title: "DCIM 2.0: The Intelligent Operations Layer for Modern Data Centres",
+                  time: "10:25", timeTo: "11:00", stage: "Main Stage",
+                  brief: "This session will explore how DCIM 2.0 is transforming modern data centres through real-time visibility, predictive analytics, automation, and intelligent infrastructure operations at scale.",
+                  speakers: "", cats: ["panel","ai"],
+                  tags: [{label:"Hyperscale",color:"red"},{label:"Edge",color:"teal"},{label:"Data Gravity",color:"blue"}]
+                }
+              ]
+            },
+            { break: true, label: "Break", time: "11:00 – 11:20" },
+            {
+              label: null,
+              sessions: [
+                {
+                  type: "Tech Deep Dive Session",
+                  logo: "TECH\nDEEP DIVE",
+                  title: "Direct-to-Chip Cooling (D2C): Engineering for the AI Heat Crisis",
+                  time: "11:20", timeTo: "11:50", stage: "Tech Stage",
+                  brief: "This session will explore advanced thermal management, liquid cooling technologies, chip-level heat dissipation, and infrastructure adaptation for high-performance AI systems.",
+                  speakers: "", cats: ["tech","energy"],
+                  tags: [{label:"Liquid Cooling",color:"blue"},{label:"D2C",color:"red"},{label:"Thermal",color:"amber"}]
+                },
+                {
+                  type: "Global Strategy Session",
+                  logo: "GLOBAL\nSTRATEGY",
+                  title: "The Rise of Carrier-Neutral Campuses: Reinventing Colocation Models",
+                  time: "11:50", timeTo: "12:20", stage: "Conference Stage",
+                  brief: "This session will explore interconnect-rich ecosystems, carrier-neutral strategies, and the transformation of colocation into integrated digital infrastructure hubs.",
+                  speakers: "", cats: ["panel","cloud"],
+                  tags: [{label:"Colocation",color:"purple"},{label:"Carrier-Neutral",color:"teal"},{label:"Interconnect",color:"blue"}]
+                },
+                {
+                  type: "The Vision Keynote",
+                  logo: "VISION\nKEYNOTE",
+                  title: "Green Compute & National Competitiveness: The Infrastructure Imperative",
+                  time: "12:20", timeTo: "12:35", stage: "Main Stage",
+                  brief: "This session will explore how sustainable compute infrastructure, energy-efficient data centres, and green digital strategies are becoming critical drivers of national competitiveness, economic resilience, and long-term digital growth.",
+                  speakers: "", cats: ["keynote","energy"],
+                  tags: [{label:"High Density",color:"red"},{label:"Green Compute",color:"green"},{label:"Scalability",color:"blue"}]
+                }
+              ]
+            },
+            { break: true, label: "Lunch", time: "12:35 – 13:15" },
+            {
+              label: "Industry Case Sessions",
+              sessions: [
+                {
+                  type: "Industry Case Keynote",
+                  logo: "INDUSTRY\nKEYNOTE",
+                  title: "From Infrastructure to Intelligence: Data Centres Driving Industry 5.0",
+                  time: "13:15", timeTo: "13:25", stage: "Main Stage",
+                  brief: "This session will explore how data infrastructure enables Industry 5.0 through AI-driven automation, real-time analytics, and human-machine collaboration.",
+                  speakers: "", cats: ["keynote","industry","ai"],
+                  tags: [{label:"Industry 5.0",color:"red"},{label:"Automation",color:"purple"},{label:"Physical",color:"teal"}]
+                },
+                {
+                  type: "Industry Experience — Investment",
+                  logo: "INVESTMENT\nSESSION",
+                  title: "Financing the Future: Why Digital Infrastructure Has Become Mission Critical",
+                  time: "13:25", timeTo: "13:55", stage: "Main Stage",
+                  brief: "This session will explore why investment into data centres, energy systems, connectivity, and digital infrastructure has become essential to powering economic resilience, AI growth, enterprise transformation, and national competitiveness.",
+                  speakers: "", cats: ["panel","industry"],
+                  tags: [{label:"Investment",color:"amber"},{label:"Infrastructure",color:"navy"},{label:"Finance",color:"blue"}]
+                },
+                {
+                  type: "The Think Tank Session — Telecom",
+                  logo: "THINK\nTANK",
+                  title: "5G, MEC & Edge: Telecom's New Infrastructure Stack",
+                  time: "13:55", timeTo: "14:25", stage: "Tech Stage",
+                  brief: "This session will explore integration of 5G networks, multi-access edge computing, and distributed data centres to support next-generation telecom services.",
+                  speakers: "", cats: ["tech","industry"],
+                  tags: [{label:"5G",color:"teal"},{label:"MEC",color:"purple"},{label:"Edge",color:"blue"}]
+                },
+                {
+                  type: "The Premier Session — MedTech",
+                  logo: "MEDTECH\nPREMIER",
+                  title: "From Scans to Signals: Data Infrastructure in Precision Healthcare",
+                  time: "14:25", timeTo: "14:55", stage: "Main Stage",
+                  brief: "This session will explore AI-powered diagnostics, medical data pipelines, secure patient data management, and infrastructure for precision medicine.",
+                  speakers: "", cats: ["panel","industry"],
+                  tags: [{label:"MedTech",color:"green"},{label:"AI Diagnostics",color:"red"},{label:"Healthcare",color:"purple"}]
+                }
+              ]
+            },
+            { break: true, label: "Break", time: "14:55 – 15:15" },
+            {
+              label: null,
+              sessions: [
+                {
+                  type: "The Twin Talk",
+                  logo: "TWIN\nTALK",
+                  title: "Digital Twins at Scale: Real-Time Intelligence for Next-Generation Infrastructure",
+                  time: "15:15", timeTo: "15:45", stage: "Tech Stage",
+                  brief: "This session will explore the convergence of energy systems and digital infrastructure, including smart grids, AI-driven energy optimization, and sustainable compute power strategies.",
+                  speakers: "", cats: ["tech","energy","industry"],
+                  tags: [{label:"Smart Grid",color:"amber"},{label:"IoT",color:"teal"},{label:"Sustainable",color:"blue"}]
+                },
+                {
+                  type: "The Grand Closing",
+                  logo: "GRAND\nCLOSING",
+                  title: "The Canadian Digital Continuum: Where Legacy, Infrastructure & Innovation Converge",
+                  time: "15:45", timeTo: "16:00", stage: "Main Stage",
+                  brief: "This session will explore the integration of legacy systems with next-generation infrastructure, focusing on scalability, modernization, and national digital competitiveness.",
+                  speakers: "", cats: ["panel","ai","cloud","industry"],
+                  tags: [{label:"Closing Panel",color:"red"},{label:"Innovation",color:"purple"},{label:"Canada Digital",color:"amber"}]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  </script>
+
+  <div id="app"></div>
+
+  <script>
+    const CATS = [
+      { id: 'all',      label: 'All Sessions' },
+      { id: 'keynote',  label: 'Keynotes' },
+      { id: 'panel',    label: 'Panels' },
+      { id: 'tech',     label: 'Tech Sessions' },
+      { id: 'cloud',    label: 'Cloud' },
+      { id: 'ai',       label: 'AI & Compute' },
+      { id: 'industry', label: 'Industry Cases' },
+      { id: 'security', label: 'Security' },
+      { id: 'energy',   label: 'Energy & Power' },
+    ];
+
+    let currentDay = 0;
+    let currentCat = 'all';
+
+    function buildApp() {
+      const app = document.getElementById('app');
+      app.innerHTML = `
+        <div class="hdr">
+          <div class="hdr-top">
+            <div class="event-brand">
+              <p>${DATA.event.name}</p>
+              <h2>${DATA.event.subtitle}</h2>
+            </div>
+            <div class="date-tabs" id="dateTabs">
+              ${DATA.days.map((d, i) => `
+                <div class="dtab${i === 0 ? ' active' : ''}" onclick="switchDay(${i}, this)">
+                  <span class="dtab-day">${d.day}</span>
+                  <span class="dtab-date">${d.date}</span>
+                  <span class="dtab-arrow">▼</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          ${/*
+      <div class="cat-tabs">
+        ${CATS.map(c => `<div class="cattab${c.id === 'all' ? ' active' : ''}" onclick="filterCat('${c.id}',this)">${c.label}</div>`).join('')}
+      </div>
+      */''}
+        </div>
+        <div class="body" id="body">
+          ${DATA.days.map((day, di) => `
+            <div class="day-panel${di === 0 ? ' active' : ''}" id="day${di}">
+              <div class="day-title">
+                <div class="day-title-badge">${day.label} · ${day.date} 2026</div>
+                <div class="day-title-line"></div>
+                <h3>${day.theme}</h3>
+              </div>
+              <div class="timeline">
+                ${renderSections(day.sections)}
+              </div>
+              <div class="no-results" id="no${di}">No sessions match your filter.</div>
+            </div>`).join('')}
+        </div>
+        <div class="bottom-nav" id="bottomNav"></div>`;
+    }
+
+    function renderSections(sections) {
+      return sections.map(sec => {
+        if (sec.break) return `
+          <div class="break-row">
+            <div class="break-dot"></div>
+            <div class="break-inner">
+              <span class="break-icon">${sec.label === 'Lunch' ? '🍽️' : '☕'}</span>
+              <span class="break-text">${sec.label}</span>
+              <span class="break-time">${sec.time}</span>
+            </div>
+          </div>`;
+        return `
+          ${sec.label ? `<div class="sdiv"><div class="sdiv-line"></div><div class="sdiv-label">${sec.label}</div><div class="sdiv-line"></div></div>` : ''}
+          ${sec.sessions.map(s => renderSession(s)).join('')}`;
+      }).join('');
+    }
+
+    function renderSession(s) {
+      const catsStr = s.cats.join(' ');
+      const tags = s.tags.map(t => `<span class="ctag ${t.color}">${t.label}</span>`).join('');
+      const speakerHtml = s.speakers ? `<div class="cspeakers">Speakers: ${s.speakers}</div>` : '';
+      return `
+        <div class="trow" data-cats="${catsStr}">
+          <div class="tlabel">
+            <div class="tdot"></div>
+            <span class="tlabel-time">${s.time}</span>
+            <span class="tlabel-sub">– ${s.timeTo}</span>
+          </div>
+          <div class="scard">
+            <div class="card-inner">
+              <div class="card-logo"><div class="card-logo-text">${s.logo}</div></div>
+              <div class="card-content">
+                <div class="ctype">${s.type}</div>
+                <div class="ctitle">${s.title}</div>
+                <div class="ctloc">${s.time} – ${s.timeTo} <span class="dot">•</span> ${s.stage}</div>
+                <div class="cbrief">${s.brief}</div>
+                ${speakerHtml}
+                <div class="ctags">${tags}</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderBottomNav() {
+      const nav = document.getElementById('bottomNav');
+      if (!nav) return;
+      const days = DATA.days;
+      let html = '';
+
+      if (currentDay > 0) {
+        const prev = days[currentDay - 1];
+        html += `
+          <div class="bnav-btn" onclick="switchDay(${currentDay - 1}, document.querySelectorAll('.dtab')[${currentDay - 1}])">
+            <span class="bnav-arrow">←</span>
+            <div class="bnav-text">
+              <span class="bnav-sub">Previous</span>
+              <span class="bnav-label">${prev.label} · ${prev.date}</span>
+            </div>
+          </div>`;
+      } else {
+        html += `<div class="bnav-spacer"></div>`;
+      }
+
+      if (currentDay < days.length - 1) {
+        const next = days[currentDay + 1];
+        html += `
+          <div class="bnav-btn" onclick="switchDay(${currentDay + 1}, document.querySelectorAll('.dtab')[${currentDay + 1}])">
+            <div class="bnav-text right">
+              <span class="bnav-sub">Next</span>
+              <span class="bnav-label">${next.label} · ${next.date}</span>
+            </div>
+            <span class="bnav-arrow">→</span>
+          </div>`;
+      } else {
+        html += `<div class="bnav-spacer"></div>`;
+      }
+
+      nav.innerHTML = html;
+    }
+
+    function switchDay(d, el) {
+      currentDay = d;
+      document.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('day' + d).classList.add('active');
+      applyFilters();
+      renderBottomNav();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function filterCat(cat, el) {
+      currentCat = cat;
+      document.querySelectorAll('.cattab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const panel = document.getElementById('day' + currentDay);
+      const rows = panel.querySelectorAll('.trow');
+      let vis = 0;
+      rows.forEach(row => {
+        const cats = (row.dataset.cats || '').split(' ');
+        const ok = currentCat === 'all' || cats.includes(currentCat);
+        row.classList.toggle('hidden', !ok);
+        if (ok) vis++;
+      });
+      document.getElementById('no' + currentDay).classList.toggle('show', vis === 0);
+    }
+
+    buildApp();
+    renderBottomNav();
+  </script>
+
+</body>
+</html>
